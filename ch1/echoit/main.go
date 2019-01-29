@@ -13,7 +13,6 @@ import (
 	"strings"
 )
 
-//!+
 func main() {
 
 	fmt.Println(ByJoin(os.Args))
@@ -32,5 +31,3 @@ func ByLoop(args []string) string {
 	}
 	return builder.String()
 }
-
-//!-
