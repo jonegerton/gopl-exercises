@@ -9,25 +9,28 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
 //!+
 func main() {
 
-	ByJoin()
+	fmt.Println(ByJoin(os.Args))
 
-	ByLoop()
+	fmt.Println(ByLoop(os.Args))
 }
 
-func ByJoin() {
-	fmt.Println(strings.Join(os.Args, " "))
+func ByJoin(args []string) string {
+	return strings.Join(os.Args[1:], " ")
 }
 
-func ByLoop() {
+func ByLoop(args []string) string {
+	var builder strings.Builder
 	for i, arg := range os.Args[1:] {
-		fmt.Println(i, ":", arg)
+		builder.WriteString(strconv.Itoa(i) + ":" + arg + "\n")
 	}
+	return builder.String()
 }
 
 //!-

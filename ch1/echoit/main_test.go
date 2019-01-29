@@ -4,13 +4,15 @@ import (
 	"testing"
 )
 
-func BenchmarkByJoin(b *testing.B) {
+var args = []string{"exe", "1", "2", "3"}
+
+func BenchmarkEchoByJoin(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		ByJoin()
+		ByJoin(args)
 	}
 }
-func BenchmarkByLoop(b *testing.B) {
+func BenchmarkEchoByLoop(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		ByLoop()
+		ByLoop(args)
 	}
 }
