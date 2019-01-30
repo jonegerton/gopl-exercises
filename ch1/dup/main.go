@@ -5,8 +5,11 @@
 
 //!+
 
-// Dup3 prints the count and text of lines that
+// Dup prints the count and text of lines that
 // appear more than once in the named input files.
+// Includes the name of the file in the output
+// To run use command similar to:
+// go run main.go "C:\Git\gopl-exercises\ch1\dup\test1.txt" "C:\Git\gopl-exercises\ch1\dup\test2.txt" "C:\Git\gopl-exercises\ch1\dup\test3.txt"
 package main
 
 import (
@@ -25,17 +28,25 @@ func main() {
 			continue
 		}
 		for _, line := range strings.Split(string(data), "\n") {
+
+			//Allow for windows line breaks
+			line = strings.Replace(line, "\r", "", -1)
+
+			if len(line) == 0 {
+				continue
+			}
+
 			if counts[line] == nil {
 				counts[line] = make(map[string]int)
 			}
 			counts[line][filename]++
 		}
 	}
-	fmt.Print(counts)
+	//fmt.Print(counts)
 	for line, files := range counts {
 		for filename, n := range files {
 			if len(files) > 1 || n > 1 {
-				fmt.Printf("%d\t%s\t%s\n", n, line, filename)
+				fmt.Printf("%s\t%s\t%d\n", line, filename, n)
 			}
 		}
 	}
